@@ -1,0 +1,26 @@
+{
+  "name": "bitacora-cli",
+  "version": "1.0.0",
+  "description": "Aplicación de consola para registrar notas de aprendizaje",
+  "keywords": [
+    "bitacora",
+    "notas",
+    "nodejs",
+    "cli"
+  ],
+  "homepage": "https://github.com/yiselsa02/Bitacora-cli#readme",
+  "bugs": {
+    "url": "https://github.com/yiselsa02/Bitacora-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yiselsa02/Bitacora-cli.git"
+  },
+  "license": "ISC",
+  "author": "Karen Santamaria",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+  "start": "node src/index.js"
+}
+}

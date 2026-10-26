@@ -29,20 +29,19 @@ ayuda                         Muestra esta ayuda.
 }
 
 switch (comando) {
+
     case 'agregar': {
         const texto = argumentos[1];
         const etiqueta = argumentos[2] || 'general';
-
         const resultado = agregarNota(texto, etiqueta);
         console.log(`${resultado.mensaje}`);
-
         registrarAccion('agregar', resultado.mensaje);
         break;
     }
 
+
     case 'listar': {
         let cantidad = argumentos[1];
-
         if (cantidad === undefined) {
             cantidad = 5;
         } else {
@@ -53,18 +52,23 @@ switch (comando) {
                 cantidad = 5;
             }
         }
-
         const notas = listarNotas(cantidad);
 
         if (notas.length === 0) {
             console.log(`No hay notas para mostrar.`);
         } else {
             notas.forEach(nota => {
-                console.log(`${nota.id} | ${nota.texto} | ${nota.etiqueta} | ${nota.fecha}`);
+                console.log(
+                    `${nota.id} | ${nota.texto} | ${nota.etiqueta} | ${nota.fecha}`
+                );
             });
         }
 
-        registrarAccion('listar', `Se mostraron ${notas.length} notas.`);
+        registrarAccion(
+            'listar',
+            `Se mostraron ${notas.length} notas.`
+        );
+
         break;
     }
 
@@ -73,69 +77,100 @@ switch (comando) {
 
         if (!palabra) {
             console.log(`Debes indicar una palabra para buscar.`);
-            registrarAccion('buscar', 'Palabra no indicada.');
+            registrarAccion(
+                'buscar',
+                'Palabra no indicada.'
+            );
             break;
         }
 
         const notas = buscarNotas(palabra);
 
         if (notas.length === 0) {
-            console.log(`No se encontraron notas que contengan "${palabra}".`);
+            console.log(
+                `No se encontraron notas que contengan "${palabra}".`
+            );
         } else {
             notas.forEach(nota => {
-                console.log(`${nota.id} | ${nota.texto} | ${nota.etiqueta} | ${nota.fecha}`);
+                console.log(
+                    `${nota.id} | ${nota.texto} | ${nota.etiqueta} | ${nota.fecha}`
+                );
             });
         }
 
-        registrarAccion('buscar', `Se encontraron ${notas.length} notas.`);
+        registrarAccion(
+            'buscar',
+            `Se encontraron ${notas.length} notas.`
+        );
         break;
     }
+
 
     case 'borrar': {
         const id = argumentos[1];
-
         if (!id) {
-            console.log(`Debes indicar el id de la nota que quieres borrar.`);
-            registrarAccion('borrar', 'Id no indicado.');
+            console.log(
+                `Debes indicar el id de la nota que quieres borrar.`
+            );
+            registrarAccion(
+                'borrar',
+                'Id no indicado.'
+            );
             break;
         }
-
         const resultado = borrarNota(id);
         console.log(`${resultado.mensaje}`);
-
-        registrarAccion('borrar', resultado.mensaje);
+        registrarAccion(
+            'borrar',
+            resultado.mensaje
+        );
         break;
     }
+
 
     case 'respaldar': {
         const archivoRespaldo = respaldarNotas();
-
-        console.log(`Respaldo creado correctamente en ${archivoRespaldo}.`);
-
-        registrarAccion('respaldar', `Respaldo creado en ${archivoRespaldo}.`);
+        console.log(
+            `Respaldo creado correctamente en ${archivoRespaldo}.`
+        );
+        registrarAccion(
+            'respaldar',
+            `Respaldo creado en ${archivoRespaldo}.`
+        );
         break;
     }
+
 
     case 'exportar': {
         const carpetaDestino = argumentos[1];
-
         const resultado = exportarNotas(carpetaDestino);
-
         console.log(`${resultado.mensaje}`);
-
-        registrarAccion('exportar', resultado.mensaje);
+        registrarAccion(
+            'exportar',
+            resultado.mensaje
+        );
         break;
     }
+
 
     case 'ayuda':
     case undefined:
         mostrarAyuda();
-        registrarAccion(comando || 'ninguno', 'Se mostró la ayuda.');
+
+        registrarAccion(
+            comando || 'ninguno',
+            'Se mostró la ayuda.'
+        );
         break;
+
 
     default:
         console.log(`El comando "${comando}" no existe.`);
         mostrarAyuda();
-        registrarAccion(comando, 'Comando no reconocido.');
+        registrarAccion(
+            comando,
+            'Comando no reconocido.'
+        );
+
         break;
 }

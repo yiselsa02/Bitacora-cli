@@ -3,12 +3,14 @@ import fechas from 'fechas-bitacora-karenn';
 
 import {
     leerNotas,
-    guardarNotas,
+    guardarNotas
 } from './almacen.js';
+
 
 const {
     getTimeStamp
 } = fechas;
+
 
 function agregarNota(texto, etiqueta = 'general') {
     if (!texto || !texto.trim()) {
@@ -48,6 +50,7 @@ function agregarNota(texto, etiqueta = 'general') {
     };
 }
 
+
 function listarNotas(cantidad = 5) {
     const notas = leerNotas();
 
@@ -58,6 +61,7 @@ function listarNotas(cantidad = 5) {
     return notas.slice(-cantidad).reverse();
 }
 
+
 function buscarNotas(palabra) {
     const notas = leerNotas();
     const palabraBuscada = palabra.toLowerCase();
@@ -66,6 +70,7 @@ function buscarNotas(palabra) {
         nota.texto.toLowerCase().includes(palabraBuscada)
     );
 }
+
 
 function borrarNota(id) {
     const notas = leerNotas();
@@ -83,9 +88,10 @@ function borrarNota(id) {
 
     return {
         ok: true,
-        mensaje: `La nota con id ${id} fue eliminada correctamente.`
+        mensaje: `La nota con id ${id} fue eliminada correctamente`
     };
 }
+
 
 export {
     agregarNota,

@@ -6,7 +6,9 @@ import {
 } from './notas.js';
 
 import {
-    registrarAccion
+    registrarAccion,
+    respaldarNotas,
+    exportarNotas
 } from './almacen.js';
 
 const argumentos = process.argv.slice(2);
@@ -20,6 +22,8 @@ agregar "<texto>" [etiqueta]  Guarda una nueva nota.
 listar [N]                    Muestra las últimas N notas.
 buscar <palabra>              Busca notas por palabra.
 borrar <id>                   Elimina una nota por su id.
+respaldar                     Crea un respaldo de las notas.
+exportar [carpeta-destino]    Exporta las notas a una carpeta.
 ayuda                         Muestra esta ayuda.
 `);
 }
@@ -100,6 +104,26 @@ switch (comando) {
         console.log(`${resultado.mensaje}`);
 
         registrarAccion('borrar', resultado.mensaje);
+        break;
+    }
+
+    case 'respaldar': {
+        const archivoRespaldo = respaldarNotas();
+
+        console.log(`Respaldo creado correctamente en ${archivoRespaldo}.`);
+
+        registrarAccion('respaldar', `Respaldo creado en ${archivoRespaldo}.`);
+        break;
+    }
+
+    case 'exportar': {
+        const carpetaDestino = argumentos[1];
+
+        const resultado = exportarNotas(carpetaDestino);
+
+        console.log(`${resultado.mensaje}`);
+
+        registrarAccion('exportar', resultado.mensaje);
         break;
     }
 

@@ -1,8 +1,14 @@
 import objectHash from 'object-hash';
+import fechas from 'fechas-bitacora-karenn';
+
 import {
     leerNotas,
     guardarNotas,
 } from './almacen.js';
+
+const {
+    getTimeStamp
+} = fechas;
 
 function agregarNota(texto, etiqueta = 'general') {
     if (!texto || !texto.trim()) {
@@ -29,7 +35,7 @@ function agregarNota(texto, etiqueta = 'general') {
         id,
         texto: textoLimpio,
         etiqueta,
-        fecha: Date.now()
+        fecha: getTimeStamp()
     };
 
     notas.push(nuevaNota);
